@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><link rel="stylesheet" href="Help_files/matlab-report-styles.css" type="text/css" /><script type="text/javascript" language="JavaScript" src="Help_files/matlabreports.js"></script><title>Help Report</title></head><body><div class="report-head">Help Report</div><p><div class="report-desc">The Help Report presents a summary view of the help component of your MATLAB files  (<a href="matlab:helpview([docroot '/techdoc/matlab_env/matlab_env.map'], 'matlab_env_help_rpt')">Learn More</a>).</div><table border="0"><tr><td><input type="button" value="Rerun This Report" id="rerunThisReport" onclick="runreport('helprpt(\'/autofs/cluster/purdonlab/code/matlab/point_process\',\'dir\')');" /></td><td><input type="button" value="Run Report on Current Folder" id="runReportOnCurrent" onclick="runreport('helprpt');" /></td></tr></table><form method="post" action="matlab:internal.matlab.codetools.reports.handleForm"><input type="hidden" name="reporttype" value="helprpt" /><table cellspacing="8"><tr><td><input type="checkbox" name="helpSubfunsDisplayMode" checked onChange="this.form.submit()" />Show class methods</td><td><input type="checkbox" name="h1DisplayMode" checked onChange="this.form.submit()" />Description</td><td><input type="checkbox" name="exampleDisplayMode" checked onChange="this.form.submit()" />Examples</td></tr><tr><td><input type="checkbox" name="helpDisplayMode" checked onChange="this.form.submit()" />Show all help</td><td><input type="checkbox" name="seeAlsoDisplayMode" checked onChange="this.form.submit()" />See also</td><td><input type="checkbox" name="copyrightDisplayMode" checked onChange="this.form.submit()" />Copyright</td></tr></table></form>Report for folder /autofs/cluster/purdonlab/code/matlab/point_process<p><strong>MATLAB File List</strong><br/><table cellspacing="0" cellpadding="2" border="0"><tr><td valign="top" class="td-linetop"><a href="matlab: edit(urldecode('%2Fautofs%2Fcluster%2Fpurdonlab%2Fcode%2Fmatlab%2Fpoint_process%2Fcvexample.m'))"><span class="mono">cvexample</span></a></td><td class="td-linetopleft"><pre> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</pre><pre> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                   CVEXAMPLE.M
+                          &#xfffd; Michael J. Prerau, Ph.D. 2011
+ 
+    This code is used in thethe algorithm described in:
+    Prerau M.J., Eden U.T. 
+    "A General Likelihood Framework for Characterizing the Time Course of Neural Activity", 
+    Journal of Neuroscience, 2011
+ 
+    An example of how to use the cross-validation kernel smoother in
+    MATLAB. In this example we simulate a "true rate" which is a scaled
+    sinusoid. From this rate we generate spikes using an inhomogeneous
+    Poisson model. Using only the spikes, we estimate the true rate. Our
+    estimate is shown in red, and the true rate is shown in dashhed gray.
+ 
+    We show and example of estimating rates from two simulated rate
+    functions--one with a large bandwidth, and one with a small bandwidth
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+<br/></pre><span style="background: #FFC0C0">No examples</span><br/><span style="background: #FFC0C0">No See Also line</span><br/><span style="background: #FFC0C0">No copyright line</span><br/></td></tr><tr><td valign="top" class="td-linetop"><a href="matlab: edit(urldecode('%2Fautofs%2Fcluster%2Fpurdonlab%2Fcode%2Fmatlab%2Fpoint_process%2Fcvkernel.m'))"><span class="mono">cvkernel</span></a></td><td class="td-linetopleft"><pre> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</pre><pre> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                    CVKERNEL.M
+                          &#xfffd; Michael J. Prerau, Ph.D. 2011
+ 
+    This code is derived from the algorithm in:
+    Prerau M.J., Eden U.T. 
+    "A General Likelihood Framework for Characterizing the Time Course of Neural Activity", 
+    Journal of Neuroscience, 2011
+ 
+    Performs hanning kernel smoothing using cross validation on the
+    kernel smoother used on spiking
+ 
+    USAGE:
+        [estimate kmax loglikelihoods bandwidths]=cvkernel(spikecounts, dt)
+                                       or
+        [estimate kmax loglikelihoods bandwidths]=cvkernel(spikecounts, dt, range)
+                                       or
+        [estimate kmax loglikelihoods bandwidths]=cvkernel(spikecounts, dt, range, ploton)
+ 
+    INPUTS:
+        spikecounts is the 1xN vector of spike counts
+        dt is the sampling rate (in seconds) of spikecounts
+ 
+      Optional:
+        range is a 1xV vector that specifies the range of bandwidths to use in the
+            cross-validation. This vector the units of this vector is number of
+            dt sized time bins and all values should be odd. (Default: [3:2:N])
+        ploton is 1 for a figure showing the estimate and bandwidth
+            likelihood with confidence bounds, (Default: 0)
+ 
+    OUTPUTS:
+        estimate is the estimate of the nonparametric regression/rate
+        kmax is the bandwidth with the maximum likelihood
+        loglikelihoods is a vector of log-likelihood values for each kernel
+            bandwidth
+        bandwidths is a 1xV vector number of dt sized time bins used for the bandwith
+            at each iteration of the cross-validation
+        CI is a 1x2 vector of estimated 95% confidence bounds from the Fisher
+            information on the bandwidth size
+ 
+    EXAMPLE:
+        Run "cvexample.m" for an example of the cross-validated kernel
+        smoother used on spiking data.
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+<br/></pre><pre><a href="matlab: opentoline(urldecode('%2Fautofs%2Fcluster%2Fpurdonlab%2Fcode%2Fmatlab%2Fpoint_process%2Fcvkernel.m'),41)">41:</a>  
+EXAMPLE:
+Run "cvexample.m" for an example of the cross-validated kernel
+smoother used on spiking data.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+</pre><span style="background: #FFC0C0">No See Also line</span><br/><span style="background: #FFC0C0">No copyright line</span><br/></td></tr><tr><td valign="top" class="td-linetop"><a href="matlab: edit(urldecode('%2Fautofs%2Fcluster%2Fpurdonlab%2Fcode%2Fmatlab%2Fpoint_process%2Fkconv.m'))"><span class="mono">kconv</span></a></td><td class="td-linetopleft"><pre> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%</pre><pre> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                                     KCONV.M
+                          &#xfffd; Michael J. Prerau, Ph.D. 2011
+ 
+    This code is used in thethe algorithm described in:
+    Prerau M.J., Eden U.T. 
+    "A General Likelihood Framework for Characterizing the Time Course of Neural Activity", 
+    Journal of Neuroscience, 2011
+ 
+    Performs a kernel convolution removing end effects and returning a
+    result the same size as the input data
+ 
+        result=kconv(data,k,dt)
+ 
+        data is the 1xN data vector
+        k is the kernel/window function. kconv requires an odd length window
+        dt is the time resolution
+        
+        result is the 1XN result of the kernel smoother
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+<br/></pre><span style="background: #FFC0C0">No examples</span><br/><span style="background: #FFC0C0">No See Also line</span><br/><span style="background: #FFC0C0">No copyright line</span><br/></td></tr></table></body></html>
