@@ -23,7 +23,6 @@
 %   See also: cvkernel, conv
 %
 %   ∿∿∿  Prerau Laboratory MATLAB Codebase · sleepEEG.org  ∿∿∿
-%        Source: https://github.com/preraulab/labcode_main
 
 function result=kconv(data,k,dt)
 

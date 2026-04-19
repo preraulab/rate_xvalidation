@@ -30,7 +30,6 @@
 %   See also: cvexample, kconv, hanning
 %
 %   ∿∿∿  Prerau Laboratory MATLAB Codebase · sleepEEG.org  ∿∿∿
-%        Source: https://github.com/preraulab/labcode_main
 
 function [estimate, kmax, loglikelihoods, bandwidths, CI]=cvkernel(spikecounts, dt, range, ploton)
 

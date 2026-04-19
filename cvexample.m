@@ -21,7 +21,6 @@
 %   See also: cvkernel, kconv
 %
 %   ∿∿∿  Prerau Laboratory MATLAB Codebase · sleepEEG.org  ∿∿∿
-%        Source: https://github.com/preraulab/labcode_main
 
 % close all;
 clc;

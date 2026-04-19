@@ -6,4 +6,3 @@
 %   kconv     - Kernel convolution that removes end effects, same-size output
 %
 %   ∿∿∿  Prerau Laboratory MATLAB Codebase · sleepEEG.org  ∿∿∿
-%        Source: https://github.com/preraulab/labcode_main
