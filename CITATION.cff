@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this software, please also cite the associated paper (see preferred-citation)."
+title: "rate_xvalidation"
+abstract: "Cross-validated Hanning-kernel smoother for point-process firing-rate estimation."
+authors:
+  - family-names: Prerau
+    given-names: Michael J.
+    name-suffix: Ph.D.
+    affiliation: "Prerau Laboratory, Brigham and Women's Hospital, Harvard Medical School"
+    orcid: "https://orcid.org/0000-0002-9010-5273"
+  - family-names: Eden
+    given-names: Uri T.
+    affiliation: "Prerau Laboratory, Brigham and Women's Hospital, Harvard Medical School"
+    orcid: "https://orcid.org/0000-0002-2058-3691"
+type: software
+license: BSD-3-Clause
+url: "https://github.com/preraulab/rate_xvalidation"
+repository-code: "https://github.com/preraulab/rate_xvalidation"
+preferred-citation:
+  type: article
+  title: "A General Likelihood Framework for Characterizing the Time Course of Neural Activity"
+  authors:
+    - family-names: Prerau
+      given-names: Michael J.
+      orcid: "https://orcid.org/0000-0002-9010-5273"
+    - family-names: Eden
+      given-names: Uri T.
+      orcid: "https://orcid.org/0000-0002-2058-3691"
+  journal: "Neural Computation"
+  volume: 23
+  issue: 10
+  start: 2537
+  end: 2566
+  year: 2011
+  doi: "10.1162/NECO_a_00185"
