@@ -1,23 +1,30 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                    KCONV.M
-%                         � Michael J. Prerau, Ph.D. 2011
+%KCONV  Kernel convolution that corrects end effects and returns same-size output
 %
-%   This code is used in thethe algorithm described in:
-%   Prerau M.J., Eden U.T. 
-%   "A General Likelihood Framework for Characterizing the Time Course of Neural Activity", 
-%   Journal of Neuroscience, 2011
+%   Usage:
+%       result = kconv(data, k)
+%       result = kconv(data, k, dt)
 %
-%   Performs a kernel convolution removing end effects and returning a
-%   result the same size as the input data
+%   Inputs:
+%       data : 1xN double - input signal -- required
+%       k    : 1xW double - odd-length kernel / window function -- required
+%       dt   : double - time resolution (default: 1)
 %
-%       result=kconv(data,k,dt)
+%   Outputs:
+%       result : 1xN double - smoothed output, same length as data
 %
-%       data is the 1xN data vector
-%       k is the kernel/window function. kconv requires an odd length window
-%       dt is the time resolution
-%       
-%       result is the 1XN result of the kernel smoother
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   Notes:
+%       Runs a standard 'same' convolution and then re-weights the first and
+%       last W samples so boundary points use only in-range kernel mass
+%       (removes tapering artifacts at the edges).
+%       From: Prerau M.J., Eden U.T. "A General Likelihood Framework for
+%       Characterizing the Time Course of Neural Activity", Journal of
+%       Neuroscience, 2011.
+%
+%   See also: cvkernel, conv
+%
+%   ∿∿∿  Prerau Laboratory MATLAB Codebase · sleepEEG.org  ∿∿∿
+%        Source: https://github.com/preraulab/labcode_main
+
 function result=kconv(data,k,dt)
 
 data=data(:)';
@@ -65,4 +72,3 @@ for wsize=wval
     %Calculate the leave-one out convolution
     result(wsize)=sum(data(ds:de).*k(ks:ke)/sum(k(ks:ke))/dt);
 end
-

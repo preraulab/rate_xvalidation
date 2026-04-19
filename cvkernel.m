@@ -1,47 +1,37 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                   CVKERNEL.M
-%                         � Michael J. Prerau, Ph.D. 2011
+%CVKERNEL  Hanning kernel smoothing for spike trains with cross-validated bandwidth selection
 %
-%   This code is derived from the algorithm in:
-%   Prerau M.J., Eden U.T. 
-%   "A General Likelihood Framework for Characterizing the Time Course of Neural Activity", 
-%   Journal of Neuroscience, 2011
+%   Usage:
+%       [estimate, kmax, loglikelihoods, bandwidths, CI] = cvkernel(spikecounts, dt)
+%       [estimate, kmax, loglikelihoods, bandwidths, CI] = cvkernel(spikecounts, dt, range)
+%       [estimate, kmax, loglikelihoods, bandwidths, CI] = cvkernel(spikecounts, dt, range, ploton)
 %
-%   Performs hanning kernel smoothing using cross validation on the
-%   kernel smoother used on spiking
+%   Inputs:
+%       spikecounts : 1xN double - binned spike counts -- required
+%       dt          : double - bin width in seconds -- required
+%       range       : 1xV double - candidate bandwidths (odd integers, dt-bin units) (default: 3:2:3*L)
+%       ploton      : logical - if true, plot estimate and bandwidth likelihood (default: false)
 %
-%   USAGE:
-%       [estimate kmax loglikelihoods bandwidths]=cvkernel(spikecounts, dt)
-%                                      or
-%       [estimate kmax loglikelihoods bandwidths]=cvkernel(spikecounts, dt, range)
-%                                      or
-%       [estimate kmax loglikelihoods bandwidths]=cvkernel(spikecounts, dt, range, ploton)
+%   Outputs:
+%       estimate       : 1xN double - nonparametric rate estimate
+%       kmax           : integer - ML bandwidth (number of dt bins)
+%       loglikelihoods : 1xV double - log-likelihood per candidate bandwidth
+%       bandwidths     : 1xV double - candidate bandwidths evaluated
+%       CI             : 1x2 double - 95% confidence bounds on bandwidth, from Fisher information
 %
-%   INPUTS:
-%       spikecounts is the 1xN vector of spike counts
-%       dt is the sampling rate (in seconds) of spikecounts
+%   Notes:
+%       Implements the leave-one-out cross-validation kernel smoother from:
+%           Prerau M.J., Eden U.T. "A General Likelihood Framework for
+%           Characterizing the Time Course of Neural Activity", Journal of
+%           Neuroscience, 2011.
 %
-%     Optional:
-%       range is a 1xV vector that specifies the range of bandwidths to use in the
-%           cross-validation. This vector the units of this vector is number of
-%           dt sized time bins and all values should be odd. (Default: [3:2:N])
-%       ploton is 1 for a figure showing the estimate and bandwidth
-%           likelihood with confidence bounds, (Default: 0)
+%   Example:
+%       See cvexample.m for a runnable demonstration.
 %
-%   OUTPUTS:
-%       estimate is the estimate of the nonparametric regression/rate
-%       kmax is the bandwidth with the maximum likelihood
-%       loglikelihoods is a vector of log-likelihood values for each kernel
-%           bandwidth
-%       bandwidths is a 1xV vector number of dt sized time bins used for the bandwith
-%           at each iteration of the cross-validation
-%       CI is a 1x2 vector of estimated 95% confidence bounds from the Fisher
-%           information on the bandwidth size
+%   See also: cvexample, kconv, hanning
 %
-%   EXAMPLE:
-%       Run "cvexample.m" for an example of the cross-validated kernel
-%       smoother used on spiking data.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%   ∿∿∿  Prerau Laboratory MATLAB Codebase · sleepEEG.org  ∿∿∿
+%        Source: https://github.com/preraulab/labcode_main
+
 function [estimate, kmax, loglikelihoods, bandwidths, CI]=cvkernel(spikecounts, dt, range, ploton)
 
 if nargin<4
@@ -99,24 +89,24 @@ parfor wn=1:length(bandwidths)
         bandwidths(wn)=bandwidths(wn)+1;
     end
     w=bandwidths(wn);
-    
+
     %Set center point to zero for leave one out filter
     mid=(w-1)/2+1;
     k=hanning(w);
     k(mid)=0;
-    
+
     %Normalize the notch kernel
     k=k/sum(k);
-    
+
     %Perform lave one out convolution
     l1o=kconv(spikecounts,k,dt);
-    
+
     %Fix log(0) problem
     l1o(~l1o)=1e-5;
-    
+
     %Calculate the likelihood
     loglikelihoods(wn)=sum(-l1o*dt+spikecounts.*log(l1o)+spikecounts*log(dt)-log(factorial(spikecounts)));
-    
+
     %     progressbar(wn/length(bandwidths));
 end
 
@@ -157,23 +147,23 @@ if ploton
     likelihood=exp(loglikelihoods-max(loglikelihoods));
     lmax=max(likelihood);
     t=dt:dt:(length(spikecounts)*dt);
-    
+
     %Plot the data and the estimate of the true value
     ax=subplot(211);
     hold on
     plot(t,estimate,'r','linewidth',2);
-    
+
     axis tight
     xlabel('Time (s)');
     ylabel('Rate (Hz)');
     title('Cross-Validated Kernel Smoother Estimate');
-    
+
     ax2=axes('position',get(ax,'position'));
     subplot(ax2);
     stem(t,spikecounts,'marker','none');
     set(gca,'color','none','yaxislocation','right','xticklabel','')
     ylabel('Spike Count');
-    
+
     %Plot the likelihood and confidence bounds for the bandwidth estimate
     subplot(212)
     hold on
@@ -186,6 +176,3 @@ if ploton
     ylabel('Likelihood');
     title('Bandwidth Likelihood');
 end
-
-
-
