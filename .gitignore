@@ -13,3 +13,7 @@ Thumbs.db
 
 #file copies 
 ._*
+
+# Sphinx build output
+docs/_build/
+docs/_autosummary/
